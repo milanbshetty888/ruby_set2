@@ -29,6 +29,7 @@ class Message
 	def groupChat(message)
 		puts "This is a Public Group"
 		puts message
+		personalChat(sendPersonalMessage)
 	end
 
 	private
@@ -41,8 +42,13 @@ class Message
 	protected
 	# The user can access this method throught its user class method 
 	def personalChat(message)
-		puts "This is a Personal Chat"
-		puts message
+		 puts "This is a Personal Chat"
+		 userobj = User.new
+		 begin
+		 userobj.secureChat('message')
+		 rescue
+		 	puts "exception raised due to calling secure chat and its impossible"
+		 end
 	end
 end
 
@@ -54,14 +60,20 @@ class User < Message
 
 	def sendSecureMessage
 		secureChat("This is confidential")
+		secureChat("message")
 	end
 
 	def sendPersonalMessage
-		personalChat("Hi, how are you?")
+		# personalChat("Hi, how are you?")
+
 	end
 end
 
 
 
 client = User.new
+# starting coding here--------------------
+client.groupChat("Hi Friends")
+
+# client.personalChat("Hi, how are you?`")
 
